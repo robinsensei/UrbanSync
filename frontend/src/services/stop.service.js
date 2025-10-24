@@ -1,27 +1,25 @@
-import axios from 'axios';
-import authHeader from './auth-header';
-
-const API_URL = import.meta.env.VITE_API_BASE_URL;
+import api from '../utils/axiosConfig';
 
 class StopService {
   getAllStops() {
-    return axios.get(`${API_URL}/stops`, { headers: authHeader() });
+    // The base URL and auth headers are now handled by the interceptor
+    return api.get('/stops');
   }
 
   getStop(id) {
-    return axios.get(`${API_URL}/stops/${id}`, { headers: authHeader() });
+    return api.get(`/stops/${id}`);
   }
 
   createStop(stop) {
-    return axios.post(`${API_URL}/stops`, stop, { headers: authHeader() });
+    return api.post('/stops', stop);
   }
 
   updateStop(id, stop) {
-    return axios.put(`${API_URL}/stops/${id}`, stop, { headers: authHeader() });
+    return api.put(`/stops/${id}`, stop);
   }
 
   deleteStop(id) {
-    return axios.delete(`${API_URL}/stops/${id}`, { headers: authHeader() });
+    return api.delete(`/stops/${id}`);
   }
 }
 

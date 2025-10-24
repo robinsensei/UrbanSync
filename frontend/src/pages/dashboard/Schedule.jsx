@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import api from '../../services/api';
+import api from '../../utils/axiosConfig';
 import ScheduleForm from '../../components/dashboard/ScheduleForm';
 import Modal from '../../components/dashboard/Modal';
 import Button from '../../components/Button';

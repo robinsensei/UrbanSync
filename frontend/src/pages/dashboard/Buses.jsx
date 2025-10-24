@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo } from 'react';
 import BusForm from '../../components/dashboard/BusForm';
 import Modal from '../../components/dashboard/Modal';
-import api from '../../services/api';
+import api from '../../utils/axiosConfig';
 import Button from '../../components/Button';
 import EditButton from '../../components/buttons/EditButton';
 

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import api from '../../services/api';
+import api from '../../utils/axiosConfig';
 import RouteStopForm from '../../components/dashboard/RouteStopForm';
 import ReorderModal from '../../components/dashboard/ReorderModal';
 import Modal from '../../components/dashboard/Modal';

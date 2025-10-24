@@ -1,27 +1,24 @@
-import axios from 'axios';
-import authHeader from './auth-header';
-
-const API_URL = import.meta.env.VITE_API_BASE_URL;
+import api from '../utils/axiosConfig';
 
 class EmployeeService {
   getAllEmployees() {
-    return axios.get(`${API_URL}/employees`, { headers: authHeader() });
+    return api.get('/employees');
   }
 
   getEmployee(id) {
-    return axios.get(`${API_URL}/employees/${id}`, { headers: authHeader() });
+    return api.get(`/employees/${id}`);
   }
 
   createEmployee(employee) {
-    return axios.post(`${API_URL}/employees`, employee, { headers: authHeader() });
+    return api.post('/employees', employee);
   }
 
   updateEmployee(id, employee) {
-    return axios.put(`${API_URL}/employees/${id}`, employee, { headers: authHeader() });
+    return api.put(`/employees/${id}`, employee);
   }
 
   deleteEmployee(id) {
-    return axios.delete(`${API_URL}/employees/${id}`, { headers: authHeader() });
+    return api.delete(`/employees/${id}`);
   }
 }
 

@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import RouteForm from '../../components/dashboard/RouteForm';
-import api from '../../services/api';
+import api from '../../utils/axiosConfig';
 import Button from '../../components/Button';
 import EditButton from '../../components/buttons/EditButton';
 

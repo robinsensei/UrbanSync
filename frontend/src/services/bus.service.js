@@ -1,27 +1,24 @@
-import axios from 'axios';
-import authHeader from './auth-header';
-
-const API_URL = import.meta.env.VITE_API_BASE_URL;
+import api from '../utils/axiosConfig';
 
 class BusService {
   getAllBuses() {
-    return axios.get(`${API_URL}/buses`, { headers: authHeader() });
+    return api.get('/buses');
   }
 
   getBus(id) {
-    return axios.get(`${API_URL}/buses/${id}`, { headers: authHeader() });
+    return api.get(`/buses/${id}`);
   }
 
   createBus(bus) {
-    return axios.post(`${API_URL}/buses`, bus, { headers: authHeader() });
+    return api.post('/buses', bus);
   }
 
   updateBus(id, bus) {
-    return axios.put(`${API_URL}/buses/${id}`, bus, { headers: authHeader() });
+    return api.put(`/buses/${id}`, bus);
   }
 
   deleteBus(id) {
-    return axios.delete(`${API_URL}/buses/${id}`, { headers: authHeader() });
+    return api.delete(`/buses/${id}`);
   }
 }
 
