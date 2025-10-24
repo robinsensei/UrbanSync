@@ -12,12 +12,16 @@ import com.Logistics.LogisticsBackend.exception.ResourceNotFoundException;
 import com.Logistics.LogisticsBackend.model.Route;
 import com.Logistics.LogisticsBackend.payload.request.RouteRequest;
 import com.Logistics.LogisticsBackend.repository.RouteRepository;
+import com.Logistics.LogisticsBackend.repository.RouteStopRepository;
 
 @Service
 public class RouteService {
 
     @Autowired
     private RouteRepository routeRepository;
+
+    @Autowired
+    private RouteStopRepository routeStopRepository;
 
     @Transactional
     public Route createRoute(RouteRequest request) {
@@ -82,9 +86,13 @@ public class RouteService {
 
     @Transactional
     public void deleteRoute(Long id) {
-        if (!routeRepository.existsById(id)) {
-            throw new ResourceNotFoundException("Route not found with id: " + id);
-        }
-        routeRepository.deleteById(id);
+        Route routeToDelete = routeRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Route not found with id: " + id));
+
+        // First, delete all associated RouteStop entries
+        routeStopRepository.deleteAll(routeStopRepository.findByRouteId(id));
+
+        // Then, delete the route itself
+        routeRepository.delete(routeToDelete);
     }
 }
