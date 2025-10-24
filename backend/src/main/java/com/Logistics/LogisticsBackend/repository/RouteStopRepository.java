@@ -8,10 +8,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.Logistics.LogisticsBackend.model.RouteStop;
+import com.Logistics.LogisticsBackend.model.Stop;
 
 @Repository
 public interface RouteStopRepository extends JpaRepository<RouteStop, Long> {
     List<RouteStop> findByRouteIdOrderByStopOrderAsc(Long routeId);
+    List<RouteStop> findByStop(Stop stop);
     List<RouteStop> findByRouteId(Long routeId);
 
     @Query("SELECT rs FROM RouteStop rs WHERE rs.route.id = :routeId AND rs.stopOrder >= :stopOrder")

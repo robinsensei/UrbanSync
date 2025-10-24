@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.Logistics.LogisticsBackend.model.Route;
+import com.Logistics.LogisticsBackend.model.Stop;
 
 @Repository
 public interface RouteRepository extends JpaRepository<Route, Long> {
@@ -15,5 +16,6 @@ public interface RouteRepository extends JpaRepository<Route, Long> {
     boolean existsByName(String name);
     boolean existsByRouteCode(String routeCode);
     boolean existsByNameAndDirection(String name, String direction);
+    List<Route> findByStopsContaining(Stop stop);
     List<Route> findByNameContainingIgnoreCase(String name);
 }

@@ -8,7 +8,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.Logistics.LogisticsBackend.exception.DuplicateResourceException;
 import com.Logistics.LogisticsBackend.exception.ResourceNotFoundException;
+import com.Logistics.LogisticsBackend.model.RouteStop;
 import com.Logistics.LogisticsBackend.model.Stop;
+import com.Logistics.LogisticsBackend.repository.RouteRepository;
+import com.Logistics.LogisticsBackend.repository.RouteStopRepository;
 import com.Logistics.LogisticsBackend.repository.StopRepository;
 
 @Service
@@ -16,6 +19,12 @@ public class StopService {
 
     @Autowired
     private StopRepository stopRepository;
+
+    @Autowired
+    private RouteRepository routeRepository;
+
+    @Autowired
+    private RouteStopRepository routeStopRepository;
 
     public List<Stop> getAllStops() {
         return stopRepository.findAll();
@@ -31,10 +40,17 @@ public class StopService {
 
     @Transactional
     public void deleteStop(Long id) {
-        if (!stopRepository.existsById(id)) {
-            throw new ResourceNotFoundException("Stop not found with id: " + id);
-        }
-        stopRepository.deleteById(id);
+        // 1. Find the stop to be deleted, or throw an exception if it doesn't exist.
+        Stop stopToDelete = stopRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Stop not found with id: " + id));
+
+        // 2. Find and delete all RouteStop entries associated with this Stop.
+        // This maintains data integrity in the join table.
+        List<RouteStop> routeStopsToDelete = routeStopRepository.findByStop(stopToDelete);
+        routeStopRepository.deleteAll(routeStopsToDelete);
+
+        // 3. Now that all associations are removed, delete the stop itself.
+        stopRepository.delete(stopToDelete);
     }
 
     @Transactional
