@@ -1,15 +1,13 @@
-import axios from 'axios';
+import axiosInstance from '../utils/axiosConfig';
 import authHeader from './auth-header';
-
-const API_URL = import.meta.env.VITE_API_BASE_URL;
 
 class RouteService {
   getAllRoutes() {
-    return axios.get(`${API_URL}/routes`, { headers: authHeader() });
+    return axiosInstance.get('/api/routes', { headers: authHeader() });
   }
 
   getRoute(id) {
-    return axios.get(`${API_URL}/routes/${id}`, { headers: authHeader() });
+    return axiosInstance.get(`/api/routes/${id}`, { headers: authHeader() });
   }
 
   createRoute(route) {
