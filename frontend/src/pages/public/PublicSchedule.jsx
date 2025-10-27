@@ -127,14 +127,14 @@ export default function PublicSchedule() {
             try {
                 // Fetch all necessary data in parallel
                 const [schedulesRes, routesRes, stopsRes] = await Promise.all([
-                    api.get('/schedules'),
-                    api.get('/routes'),
-                    api.get('/stops')
+                    api.get('/api/schedules'),
+                    api.get('/api/routes'),
+                    api.get('/api/stops')
                 ]);
 
                 // Fetch stops for each route that was returned
                 const routeStopsPromises = routesRes.data.map(route =>
-                    api.get(`/routes/${route.id}/stops`)
+                    api.get(`/api/routes/${route.id}/stops`)
                 );
                 const routeStopsResponses = await Promise.all(routeStopsPromises);
 

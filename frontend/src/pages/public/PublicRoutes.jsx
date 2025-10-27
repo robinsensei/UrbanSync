@@ -46,12 +46,12 @@ export default function PublicRoutes() {
         const fetchData = async () => {
             try {
                 // First fetch routes
-                const routesRes = await api.get('/routes', { signal: controller.signal });
+                const routesRes = await api.get('/api/routes', { signal: controller.signal });
                 const routes = routesRes.data;
 
                 // Then fetch stops for each route
                 const routeStopsPromises = routes.map(route => 
-                    api.get(`/routes/${route.id}/stops`, { signal: controller.signal })
+                    api.get(`/api/routes/${route.id}/stops`, { signal: controller.signal })
                 );
 
                 const routeStopsResponses = await Promise.all(routeStopsPromises);

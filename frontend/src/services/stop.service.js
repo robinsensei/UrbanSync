@@ -1,15 +1,13 @@
-import axios from 'axios';
+import axiosInstance from '../utils/axiosConfig';
 import authHeader from './auth-header';
-
-const API_URL = import.meta.env.VITE_API_BASE_URL;
 
 class StopService {
   getAllStops() {
-    return axios.get(`${API_URL}/stops`, { headers: authHeader() });
+    return axiosInstance.get('/api/stops', { headers: authHeader() });
   }
 
   getStop(id) {
-    return axios.get(`${API_URL}/stops/${id}`, { headers: authHeader() });
+    return axiosInstance.get(`/api/stops/${id}`, { headers: authHeader() });
   }
 
   createStop(stop) {
