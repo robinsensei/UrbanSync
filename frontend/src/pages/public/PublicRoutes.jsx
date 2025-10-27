@@ -47,10 +47,9 @@ export default function PublicRoutes() {
             try {
                 // First fetch routes
                 const routesRes = await axiosInstance.get('/api/routes', { signal: controller.signal });
-                setRoutes(routesRes.data);
-
+                
                 // Get stops for each route
-                const routeStopsPromises = routes.map(route =>
+                const routeStopsPromises = routesRes.data.map(route =>
                     axiosInstance.get(`/api/routes/${route.id}/stops`, { signal: controller.signal })
                 );
 
