@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import api from '../../services/api';
+import axiosInstance from '../../utils/axiosConfig';
 import ScheduleForm from '../../components/dashboard/ScheduleForm';
 import Modal from '../../components/dashboard/Modal';
 import Button from '../../components/Button';
@@ -30,7 +30,7 @@ export default function Schedule() {
     const fetchSchedules = async () => {
         setLoading(true);
         try {
-            const response = await api.get('/schedules');
+            const response = await axiosInstance.get('/api/schedules');
             setSchedules(response.data);
             setError(null);
         } catch (err) {
@@ -44,9 +44,9 @@ export default function Schedule() {
     const fetchFormData = async () => {
         try {
             const [employeesRes, busesRes, routesRes] = await Promise.all([
-                api.get('/employees'),
-                api.get('/buses'),
-                api.get('/routes')
+                axiosInstance.get('/api/employees'),
+                axiosInstance.get('/api/buses'),
+                axiosInstance.get('/api/routes')
             ]);
             // Filter employees to only include drivers
             const drivers = employeesRes.data.filter(emp => emp.roles.some(role => role.name === 'ROLE_DRIVER'));

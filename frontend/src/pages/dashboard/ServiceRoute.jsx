@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import api from '../../services/api';
+import axiosInstance from '../../utils/axiosConfig';
 import RouteStopForm from '../../components/dashboard/RouteStopForm';
 import ReorderModal from '../../components/dashboard/ReorderModal';
 import Modal from '../../components/dashboard/Modal';
@@ -31,7 +31,7 @@ export default function ServiceRoute() {
         const fetchRoutes = async () => {
             setLoadingRoutes(true);
             try {
-                const response = await api.get('/routes');
+                const response = await axiosInstance.get('/api/routes');
                 setRoutes(response.data);
                 // If there's only one route, automatically select it.
                 if (response.data.length === 1) {

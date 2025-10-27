@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js/auto';
 import { Pie, Bar } from 'react-chartjs-2';
-import api from '../../services/api';
+import axiosInstance from '../../utils/axiosConfig';
 import { TruckIcon, MapIcon, UserGroupIcon } from '@heroicons/react/24/outline';
 
 // No need to register components when importing from 'chart.js/auto'
@@ -32,10 +32,10 @@ const Dashboard = () => {
         const fetchData = async () => {
             try {
                 const [busesRes, routesRes, employeesRes, schedulesRes] = await Promise.all([
-                    api.get('/buses'),
-                    api.get('/routes'),
-                    api.get('/employees'),
-                    api.get('/schedules')
+                    axiosInstance.get('/api/buses'),
+                    axiosInstance.get('/api/routes'),
+                    axiosInstance.get('/api/employees'),
+                    axiosInstance.get('/api/schedules')
                 ]);
 
                 setStats({

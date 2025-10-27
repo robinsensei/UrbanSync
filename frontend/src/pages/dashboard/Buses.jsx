@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo } from 'react';
 import BusForm from '../../components/dashboard/BusForm';
 import Modal from '../../components/dashboard/Modal';
-import api from '../../services/api';
+import axiosInstance from '../../utils/axiosConfig';
 import Button from '../../components/Button';
 import EditButton from '../../components/buttons/EditButton';
 
@@ -22,7 +22,7 @@ export default function Buses() {
 
     const fetchBuses = async () => {
         try {
-            const response = await api.get('/buses');
+            const response = await axiosInstance.get('/api/buses');
             setBuses(response.data);
             setError(null);
         } catch (err) {

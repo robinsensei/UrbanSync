@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import RouteForm from '../../components/dashboard/RouteForm';
-import api from '../../services/api';
+import axiosInstance from '../../utils/axiosConfig';
 import Button from '../../components/Button';
 import EditButton from '../../components/buttons/EditButton';
 
@@ -15,7 +15,7 @@ export default function Routes() {
     const fetchRoutes = useCallback(async () => {
         setLoading(true);
         try {
-            const response = await api.get('/routes');
+            const response = await axiosInstance.get('/api/routes');
             setRoutes(response.data);
             setError(null);
         } catch (err) {

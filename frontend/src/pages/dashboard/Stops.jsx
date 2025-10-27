@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import StopForm from '../../components/dashboard/StopForm';
 import Modal from '../../components/dashboard/Modal';
-import api from '../../services/api';
+import axiosInstance from '../../utils/axiosConfig';
 import Button from '../../components/Button';
 import EditButton from '../../components/buttons/EditButton';
 import DeleteButton from '../../components/buttons/DeleteButton';
@@ -22,7 +22,7 @@ export default function Stops() {
     const fetchStops = async () => {
         setLoading(true);
         try {
-            const response = await api.get('/stops');
+            const response = await axiosInstance.get('/api/stops');
             setStops(response.data);
             setError(null);
         } catch (err) {
