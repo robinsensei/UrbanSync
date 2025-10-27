@@ -11,15 +11,15 @@ class StopService {
   }
 
   createStop(stop) {
-    return axios.post(`${API_URL}/stops`, stop, { headers: authHeader() });
+    return axiosInstance.post('/api/stops', stop, { headers: authHeader() });
   }
 
   updateStop(id, stop) {
-    return axios.put(`${API_URL}/stops/${id}`, stop, { headers: authHeader() });
+    return axiosInstance.put(`/api/stops/${id}`, stop, { headers: authHeader() });
   }
 
   deleteStop(id) {
-    return axios.delete(`${API_URL}/stops/${id}`, { headers: authHeader() });
+    return axiosInstance.delete(`/api/stops/${id}`, { headers: authHeader() });
   }
 }
 
