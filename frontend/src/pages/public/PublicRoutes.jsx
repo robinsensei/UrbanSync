@@ -50,7 +50,7 @@ export default function PublicRoutes() {
                 setRoutes(routesRes.data);
 
                 // Get stops for each route
-                const stopPromises = routes.map(route =>
+                const routeStopsPromises = routes.map(route =>
                     axiosInstance.get(`/api/routes/${route.id}/stops`, { signal: controller.signal })
                 );
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import api from '../../services/api';
+import axiosInstance from '../../utils/axiosConfig';
 import { ClockIcon, MapPinIcon, ArrowsRightLeftIcon } from '@heroicons/react/24/outline';
 import { MapContainer, TileLayer, Marker, Popup, Polyline, useMap } from 'react-leaflet';
 
@@ -27,8 +27,8 @@ const PublicRouteDetails = () => {
         const fetchRoute = async () => {
             try {
                 const [routeRes, routeStopsRes] = await Promise.all([
-                    api.get(`/routes/${id}`, { signal: controller.signal }),
-                    api.get(`/api/routes/${id}/stops`, { signal: controller.signal })
+                    axiosInstance.get(`/api/routes/${id}`, { signal: controller.signal }),
+                    axiosInstance.get(`/api/routes/${id}/stops`, { signal: controller.signal })
                 ]);
 
                 // Combine route data with its stops

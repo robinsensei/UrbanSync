@@ -134,7 +134,7 @@ export default function PublicSchedule() {
 
                 // Fetch stops for each route that was returned
                 const routeStopsPromises = routesRes.data.map(route =>
-                    api.get(`/api/routes/${route.id}/stops`)
+                    axiosInstance.get(`/api/routes/${route.id}/stops`)
                 );
                 const routeStopsResponses = await Promise.all(routeStopsPromises);
 
