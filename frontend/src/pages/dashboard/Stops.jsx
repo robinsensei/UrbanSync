@@ -36,10 +36,10 @@ export default function Stops() {
     const handleSaveStop = async (stopData) => {
         try {
             if (editingStop) {
-                const response = await api.put(`/stops/${editingStop.id}`, stopData);
+                const response = await api.put(`/api/stops/${editingStop.id}`, stopData);
                 setSuccessMessage('Stop updated successfully!');
             } else {
-                const response = await api.post('/stops', stopData);
+                const response = await api.post('/api/stops', stopData);
                 setSuccessMessage('Stop added successfully!');
             }
             await fetchStops(); // Refresh the list
@@ -56,7 +56,7 @@ export default function Stops() {
         // Recommended: Use a confirmation modal here instead of window.confirm
         if (window.confirm('Are you sure you want to delete this stop? This might affect existing routes.')) {
             try {
-                await api.delete(`/stops/${stopId}`);
+                await api.delete(`/api/stops/${stopId}`);
                 setSuccessMessage('Stop deleted successfully!');
                 await fetchStops();
             } catch (err) {

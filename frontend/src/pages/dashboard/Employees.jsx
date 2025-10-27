@@ -37,10 +37,10 @@ export default function Employees() {
         try {
             setError(null); // Clear previous errors
             if (editingEmployee) {
-                await api.put(`/employees/${editingEmployee.id}`, employeeData);
+                await axiosInstance.put(`/api/employees/${editingEmployee.id}`, employeeData);
                 setSuccessMessage('Employee updated successfully!');
             } else {
-                await api.post('/employees', employeeData);
+                await axiosInstance.post('/api/employees', employeeData);
                 setSuccessMessage('Employee added successfully!');
             }
             await fetchEmployees();

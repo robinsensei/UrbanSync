@@ -33,9 +33,9 @@ export default function Routes() {
     const handleSaveRoute = async (routeData) => {
         try {
             if (editingRoute) {
-                await api.put(`/routes/${editingRoute.id}`, routeData);
+                await api.put(`/api/routes/${editingRoute.id}`, routeData);
             } else {
-                await api.post('/routes', routeData);
+                await api.post('/api/routes', routeData);
             }
             await fetchRoutes(); // Refresh the list
             closeForm();
