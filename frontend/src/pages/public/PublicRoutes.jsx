@@ -56,7 +56,7 @@ export default function PublicRoutes() {
                 const routeStopsResponses = await Promise.all(routeStopsPromises);
 
                 // Create a map of route IDs to their stops
-                const routeStopsMap = routes.reduce((acc, route, index) => {
+                const routeStopsMap = routesRes.data.reduce((acc, route, index) => {
                     acc[route.id] = routeStopsResponses[index].data;
                     return acc;
                 }, {});
@@ -66,6 +66,10 @@ export default function PublicRoutes() {
                     ...route,
                     stops: (routeStopsMap[route.id] || []).sort((a, b) => a.stopOrder - b.stopOrder)
                 }));
+
+                console.log('Routes data:', routesRes.data);
+                console.log('Route stops map:', routeStopsMap);
+                console.log('Combined routes with stops:', routesWithStops);
 
                 setRoutes(routesWithStops);
             } catch (err) {
