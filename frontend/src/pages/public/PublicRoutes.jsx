@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import api from '../../services/api';
+import axiosInstance from '../../utils/axiosConfig';
 import { MapContainer, TileLayer, Marker, Popup, Polyline, useMap } from 'react-leaflet';
 
 const MapFocusController = ({ selectedRouteId, routes }) => {
@@ -46,12 +46,12 @@ export default function PublicRoutes() {
         const fetchData = async () => {
             try {
                 // First fetch routes
-                const routesRes = await api.get('/api/routes', { signal: controller.signal });
-                const routes = routesRes.data;
+                const routesRes = await axiosInstance.get('/api/routes', { signal: controller.signal });
+                setRoutes(routesRes.data);
 
-                // Then fetch stops for each route
-                const routeStopsPromises = routes.map(route => 
-                    api.get(`/api/routes/${route.id}/stops`, { signal: controller.signal })
+                // Get stops for each route
+                const stopPromises = routes.map(route =>
+                    axiosInstance.get(`/api/routes/${route.id}/stops`, { signal: controller.signal })
                 );
 
                 const routeStopsResponses = await Promise.all(routeStopsPromises);

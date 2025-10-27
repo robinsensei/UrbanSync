@@ -62,10 +62,10 @@ export default function Schedule() {
     const handleSaveSchedule = async (scheduleData) => {
         try {
             if (editingSchedule) {
-                await api.put(`/api/schedules/${editingSchedule.id}`, scheduleData);
+                await axiosInstance.put(`/api/schedules/${editingSchedule.id}`, scheduleData);
                 setSuccessMessage('Schedule updated successfully!');
             } else {
-                await api.post('/api/schedules', scheduleData);
+                await axiosInstance.post('/api/schedules', scheduleData);
                 setSuccessMessage('Schedule created successfully!');
             }
             await fetchSchedules();
@@ -79,7 +79,7 @@ export default function Schedule() {
     const handleDeleteSchedule = async (scheduleId) => {
         if (window.confirm('Are you sure you want to delete this schedule?')) {
             try {
-                await api.delete(`/api/schedules/${scheduleId}`);
+                await axiosInstance.delete(`/api/schedules/${scheduleId}`);
                 setSuccessMessage('Schedule deleted successfully!');
                 await fetchSchedules();
             } catch (err) {

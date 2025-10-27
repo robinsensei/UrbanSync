@@ -36,10 +36,10 @@ export default function Buses() {
     const handleSaveBus = async (busData) => {
         try {
             if (editingBus) {
-                const response = await api.put(`/api/buses/${editingBus.id}`, busData);
+                const response = await axiosInstance.put(`/api/buses/${editingBus.id}`, busData);
                 setSuccessMessage('Bus updated successfully!');
             } else {
-                const response = await api.post('/api/buses', busData);
+                const response = await axiosInstance.post('/api/buses', busData);
                 setSuccessMessage('Bus added successfully!');
             }
             await fetchBuses(); // Refresh the list

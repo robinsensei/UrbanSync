@@ -11,15 +11,15 @@ class RouteService {
   }
 
   createRoute(route) {
-    return axios.post(`${API_URL}/routes`, route, { headers: authHeader() });
+    return axiosInstance.post('/api/routes', route, { headers: authHeader() });
   }
 
   updateRoute(id, route) {
-    return axios.put(`${API_URL}/routes/${id}`, route, { headers: authHeader() });
+    return axiosInstance.put(`/api/routes/${id}`, route, { headers: authHeader() });
   }
 
   deleteRoute(id) {
-    return axios.delete(`${API_URL}/routes/${id}`, { headers: authHeader() });
+    return axiosInstance.delete(`/api/routes/${id}`, { headers: authHeader() });
   }
 }
 

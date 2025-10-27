@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import api from '../../services/api';
+import axiosInstance from '../../utils/axiosConfig';
 
 export default function Signup() {
     const [formData, setFormData] = useState({
@@ -26,7 +26,7 @@ export default function Signup() {
         setSuccess('');
         
         try {
-            const response = await api.post('/auth/signup', formData);
+            const response = await axiosInstance.post('/api/auth/signup', formData);
             setSuccess(response.data.message);
             // Clear form
             setFormData({

@@ -101,7 +101,7 @@ export default function ServiceRoute() {
     const handleDeleteRouteStop = async (routeStopId) => {
         if (window.confirm('Are you sure you want to delete this stop from the route?')) {
             try {
-                await api.delete(`/api/routes/${selectedRouteId}/stops/${routeStopId}`);
+                await axiosInstance.delete(`/api/routes/${selectedRouteId}/stops/${routeStopId}`);
                 setSuccessMessage('Stop removed successfully!');
                 await fetchRouteStops();
             } catch (err) {
@@ -167,7 +167,7 @@ export default function ServiceRoute() {
             for (const rs of reorderChange.after) {
                 // We only need to send the fields that might change, but sending all is also fine.
                 // The key is sending the new stopOrder.
-                await api.put(`/api/routes/${selectedRouteId}/stops/${rs.id}`, {
+                await axiosInstance.put(`/api/routes/${selectedRouteId}/stops/${rs.id}`, {
                     stopId: rs.stop.id,
                     stopOrder: rs.stopOrder,
                     arrivalTime: rs.arrivalTime,

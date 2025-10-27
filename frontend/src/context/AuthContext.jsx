@@ -1,5 +1,5 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
-import api from '../utils/axiosConfig';
+import axiosInstance from '../utils/axiosConfig';
 
 const AuthContext = createContext(null);
 
@@ -46,7 +46,7 @@ export const AuthProvider = ({ children }) => {
     try {
       console.log('Login attempt for:', username);
       
-      const response = await api.post('/api/auth/signin', {
+      const response = await axiosInstance.post('/api/auth/signin', {
         username,
         password
       });

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import api from '../../services/api';
+import axiosInstance from '../../utils/axiosConfig';
 import { Link } from 'react-router-dom';
 
 
@@ -127,9 +127,9 @@ export default function PublicSchedule() {
             try {
                 // Fetch all necessary data in parallel
                 const [schedulesRes, routesRes, stopsRes] = await Promise.all([
-                    api.get('/api/schedules'),
-                    api.get('/api/routes'),
-                    api.get('/api/stops')
+                    axiosInstance.get('/api/schedules'),
+                    axiosInstance.get('/api/routes'),
+                    axiosInstance.get('/api/stops')
                 ]);
 
                 // Fetch stops for each route that was returned
