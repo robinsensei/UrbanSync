@@ -28,6 +28,23 @@ import com.Logistics.LogisticsBackend.security.services.UserDetailsServiceImpl;
 @EnableMethodSecurity(securedEnabled = true, jsr250Enabled = true)
 public class WebSecurityConfig {
     private final UserDetailsServiceImpl userDetailsService;
+
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(Arrays.asList(
+            "https://urban-sync.vercel.app",
+            "http://localhost:5173",
+            "http://127.0.0.1:5173"
+        ));
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"));
+        configuration.setAllowedHeaders(Arrays.asList("*"));
+        configuration.setAllowCredentials(true);
+        
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
+    }
     private final AuthEntryPointJwt unauthorizedHandler;
 
     @Autowired
