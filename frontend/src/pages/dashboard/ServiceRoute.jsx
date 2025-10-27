@@ -49,7 +49,7 @@ export default function ServiceRoute() {
 
         const fetchAvailableStops = async () => {
             try {
-                const response = await api.get('/stops');
+                const response = await axiosInstance.get('/api/stops');
                 setAvailableStops(response.data);
             } catch (err) {
                 console.error('Error fetching available stops:', err);
@@ -67,7 +67,7 @@ export default function ServiceRoute() {
         setLoadingStops(true);
         setError(null);
         try {
-            const response = await api.get(`/routes/${selectedRouteId}/stops`);
+            const response = await axiosInstance.get(`/api/routes/${selectedRouteId}/stops`);
             setRouteStops(response.data);
         } catch (err) {
             console.error(`Error fetching stops for route ${selectedRouteId}:`, err);
@@ -84,10 +84,10 @@ export default function ServiceRoute() {
     const handleSaveRouteStop = async (routeStopData) => {
         try {
             if (editingRouteStop) {
-                await api.put(`/routes/${selectedRouteId}/stops/${editingRouteStop.id}`, routeStopData);
+                await axiosInstance.put(`/api/routes/${selectedRouteId}/stops/${editingRouteStop.id}`, routeStopData);
                 setSuccessMessage('Stop updated successfully!');
             } else {
-                await api.post(`/routes/${selectedRouteId}/stops`, routeStopData);
+                await axiosInstance.post(`/api/routes/${selectedRouteId}/stops`, routeStopData);
                 setSuccessMessage('Stop added successfully!');
             }
             await fetchRouteStops();

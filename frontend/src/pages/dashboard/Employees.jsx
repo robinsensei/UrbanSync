@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import EmployeeForm from '../../components/dashboard/EmployeeForm';
 import Modal from '../../components/dashboard/Modal';
-import api from '../../services/api';
+import axiosInstance from '../../utils/axiosConfig';
 import Button from '../../components/Button';
 import EditButton from '../../components/buttons/EditButton';
 
@@ -18,7 +18,7 @@ export default function Employees() {
         setLoading(true);
         try {
             // This endpoint is admin-only, so non-admins will see an error.
-            const response = await api.get('/employees');
+            const response = await axiosInstance.get('/api/employees');
             setEmployees(response.data);
             setError(null);
         } catch (err) {
